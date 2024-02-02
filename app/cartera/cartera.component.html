@@ -1,0 +1,30 @@
+<div class="container-fluid d-flex justify-content-center align-items-center flex-column mb-5">
+    <div class="container-fluid justify-content-center align-items-center p-3">
+        <h1 class="text-center fs-1 fw-bold">Cartera</h1>
+    </div>
+
+    <h3>Monedas en Tendencias</h3>
+
+    <ul id="trendingCoin" class="d-flex justify-content-center align-items-center gap-3 mb-5">
+        <li class="text-center gap-3" *ngFor="let moneda of ajax.datosTop">
+            <span class="text-primary fw-bold fs-3">{{moneda.item.name}}</span>
+            <span class="fs-5">Precio: {{moneda.item.data.price}}</span>
+            <img src="{{moneda.item.large}}">
+        </li>
+    </ul>
+
+    <h3>Busca tu cripto Aquí</h3>
+
+    <input class="fs-3 mb-3" (keyup.enter)="buscarMoneda()" [(ngModel)]="monedaBuscar" name="monedaBuscar" type="text" placeholder="Busca criptomoneda aquí">
+
+    <div class="container-fluid d-flex gap-4" *ngIf="ajax.mostrarMoneda">
+        <ul class="w-100 d-flex flex-column gap-3">
+            <li class="d-flex align-items-center gap-4 border border-dark" *ngFor="let moneda of ajax.datosMonedaBuscar">
+                <p class="fs-4">{{moneda.name}}</p>
+                <img style="width: 100px;" src="{{moneda.large}}">
+                <!-- <button routerLink="detalle" type="button" class="fs-5">Ver Más</button> -->
+                <a class="text-dark fs-4" (click)="verID(moneda.id)" [routerLink]="['/detalle', moneda.id]">Ver Más</a>
+            </li>
+        </ul>
+    </div>
+</div>

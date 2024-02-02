@@ -1,0 +1,115 @@
+  <header class="background-container fixed-top">
+    <!-- Contenido de la página -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold "routerLink="cuerpo"><p id="header__titulo">coinbase</p></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="menuLogin collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center">
+            <li *ngIf="isActivo" class="enlacesCentro nav-item">
+              <a class="text-dark fw-bold" routerLink="cartera">Mi Cartera</a>
+            </li>
+            <li class="enlacesCentro nav-item">
+              <a class="text-dark fw-bold" routerLink="cuerpo">Precios</a>
+            </li>
+            <li class="enlacesCentro nav-item">
+              <a class="text-dark fw-bold" routerLink="cuerpo">Aprende</a>
+            </li>
+            <!-- 
+            <li class="enlacesCentro nav-item">
+              <a href="#" class="text-dark fw-bold">Negocios</a>
+            </li>
+            <li class="enlacesCentro nav-item">
+              <a href="#" class="text-dark fw-bold">Desarrolladores</a>
+            </li>
+            <li class="enlacesCentro nav-item">
+              <a href="#" class="text-dark fw-bold">Compañia</a>
+            </li>
+            -->
+          </ul>
+        </div>
+        <div class="menuEnlaces collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center">
+            <li class="nav-item">
+              <button *ngIf="!isActivo" type="submit" class="btn__menu2 fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
+              <button *ngIf="isActivo" (click)="cerrarSesion()" type="submit" class="btn__menu2 fw-bold" type="button">Cerrar Sesión</button>
+
+            </li>
+            <li class="nav-item">
+              <button *ngIf="!isActivo" type="submit" class="btn__menu fw-bold" data-bs-toggle="modal" data-bs-target="#registrarseModal">Empezar</button>
+              <button *ngIf="isActivo" type="submit" class="btn__menu fw-bold">{{usuarioActivo.email}}</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  
+<!-- Modal Iniciar Sesión -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Iniciar Sesión</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="mensajeInicioSesion" class="fs-6 alert alert-success" role="alert">
+          {{ mensajeInicioSesion }}
+        </div>
+        <form class="d-flex flex-column">
+          <label class="fs-5" for="email">Email</label>
+          <input class="fs-5" type="email" id="email2" name="email" [(ngModel)]="email" required>
+
+          <label class="fs-5" for="pass">Contraseña</label>
+          <input class="fs-5" type="password" id="pass" name="pass" [(ngModel)]="pass" required>
+        </form>
+        <div class="d-flex align-items-center justify-content-center gap-3 p-3">
+          <a class="text-end"><img (click)="loginGithub()" class="w-25" src="../../assets/github.png" style="cursor: pointer;"></a>
+          <a class="text-start"><img (click)="loginGoogle()" class="w-25" src="../../assets/google.png" style="cursor: pointer;"></a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button (click)="loginUsuario()" type="button" class="btn btn-primary">Iniciar Sesión</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Registrarse -->
+<div class="modal fade" id="registrarseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registrarse</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="mensajeInicioSesion" class="fs-6 alert alert-success" role="alert">
+          {{ mensajeInicioSesion }}
+        </div>
+        <form class="d-flex flex-column">
+          <label class="fs-5" for="email">Email</label>
+          <input class="fs-5" type="email" id="email" [(ngModel)]="email" name="email" required>
+
+          <label class="fs-5" for="pass">Contraseña</label>
+          <input class="fs-5" type="password" id="pass" [(ngModel)]="pass" name="pass" required>
+        </form>
+        <div class="d-flex align-items-center justify-content-center gap-3 p-3">
+          <a href="#" class="text-end" (click)="loginGithub()"><img class="w-25" src="../../assets/github.png"></a>
+          <a href="#" class="text-start" (click)="loginGoogle()"><img class="w-25" src="../../assets/google.png"></a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button (click)="registrarUsuario()" type="button" class="btn btn-primary">Registrarse</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,10 @@
+<section id="container-detalle">
+    <ul>
+        <li class="d-flex flex-column align-items-center justify-content-center gap-3" *ngFor="let moneda of ajax.detallesMonedaActual">
+            <span class="text-primary fw-bold fs-1">{{moneda.name}}</span>
+            <p class="fs-5">{{moneda.description.en.slice(0,600)}}</p>
+            <img src="{{moneda.image.large}}" style="width: 200px;">
+            <button class="fs-3">Seguir</button>
+        </li>
+    </ul>
+</section>
